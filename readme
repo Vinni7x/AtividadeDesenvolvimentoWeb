@@ -1,0 +1,69 @@
+# 💪 Dia de Peito
+
+Checklist web do treino de peito: marque os exercícios feitos, acompanhe o progresso do dia e recomece com um clique. Sem cadastro, sem anúncios e sem servidor.
+
+![Tela do Dia de Peito](print/Captura%20de%20tela%202026-10-28%20235213.png)
+
+## O que o app faz
+
+- Mostra a lista de 7 exercícios do treino de peito: supino reto, supino inclinado, supino declinado, crucifixo, crossover, flexão e peck deck.
+- Permite marcar e desmarcar cada exercício com um toque.
+- Exibe um card de progresso com "X de 7", a porcentagem e uma barra dividida em 7 partes.
+- Mostra o status do treino: "Treino não iniciado", "Treino em andamento" ou "Treino concluído".
+- Mostra um selo com quantos exercícios restam ("5 restantes", "1 restante" ou "Completo") e a lista do que ainda falta.
+- Tem o botão **Novo dia**, que desmarca tudo para recomeçar.
+- Guarda as marcações no navegador (`localStorage`), então elas continuam ao recarregar a página. Nada é enviado a servidor algum.
+- Continua funcionando se o `localStorage` estiver bloqueado ou com dados inválidos: o app só deixa de salvar e começa com tudo desmarcado.
+
+**O que não faz:** login/cadastro, sincronização entre aparelhos, histórico de treinos de dias anteriores e edição da lista de exercícios pela tela (a lista fica no código).
+
+## Exemplo de uso
+
+1. Abra a página: os 7 exercícios aparecem desmarcados, com "0 de 7" e "Treino não iniciado".
+2. Toque em **Supino inclinado** e **Crucifixo**.
+3. O card mostra **2 de 7 (29%)**, o status muda para "Treino em andamento", o selo mostra "5 restantes" e o bloco "Ainda faltam" lista os outros cinco.
+4. No fim do treino, toque em **Novo dia** para desmarcar tudo.
+
+## Como rodar
+
+O projeto é HTML, CSS e JavaScript puros, sem frameworks e sem módulos. Não precisa de servidor nem de instalação: basta abrir o `peitoHTML.html` no navegador com duplo clique.
+
+Se preferir usar um servidor local, na pasta do projeto:
+
+```bash
+python -m http.server 8000
+```
+
+Depois abra `http://localhost:8000/peitoHTML.html`.
+
+## Estrutura
+
+```
+peitoHTML.html   página (HTML semântico: header, section, ul, button)
+peitoCSS.css     estilos (tema escuro com destaque verde-limão, layout mobile)
+PeitoJS.js       lógica: lista de exercícios, marcação, progresso e localStorage
+```
+
+## Decisões técnicas
+
+- **`for` simples em vez de streams/lambdas:** os laços que montam a lista, a barra de progresso e a lista de "faltam" usam `for` clássico, para o código ficar fácil de ler.
+- **Um arquivo por responsabilidade:** estrutura em HTML, aparência em CSS e comportamento em JS.
+- **`textContent`, nunca `innerHTML` com dados:** nomes de exercícios e textos entram na página com `textContent`. O `innerHTML = ""` só é usado para limpar a lista.
+- **Dados do `localStorage` validados:** ao carregar, o app confere se o valor é um array, descarta ids que não existem na lista de exercícios e remove duplicados. Leitura e escrita ficam dentro de `try/catch`.
+- **Estado em uma única fonte:** o array `marcados` guarda os ids feitos, e a tela inteira (lista, barra, status, selo e "faltam") é redesenhada a partir dele em `atualizarTela()`.
+- **Acessibilidade:** cada exercício é um `<button>` com `aria-pressed`, o resultado usa `aria-live="polite"`, a página declara `lang="pt-BR"` e as cores têm bom contraste sobre o fundo escuro.
+- **Sem dependências:** não usa API, chave ou biblioteca externa, e funciona sem internet depois que a página carrega.
+
+## Uso de IA
+
+| Ferramenta | Detalhe |
+|---|---|
+| Claude (Anthropic) | Ajudou a sugerir o tema e a redigir o rascunho desta proposta; revisei e ajustei o texto. Também foi usado para redesenhar o visual do app (HTML, CSS e JS) a partir de um layout de referência e para indicar onde cada mudança entra no código. |
+
+## 👥 Créditos
+
+- **Aluno:** Marcos Vinicius Jansem Oliveira - 20250071278
+- **Disciplina:** EECP0036 - Desenvolvimento de Sistemas WEB
+- **Professor:** Prof. Renan Sousa Freire
+- **Instituição:** UFMA — Universidade Federal do Maranhão
+- **Semestre:** 2026.2
