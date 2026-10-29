@@ -87,7 +87,7 @@ function novoDia() {
   atualizarTela();
 }
 
-/
+
 function desenharLista() {
   listaEl.innerHTML = "";
 
