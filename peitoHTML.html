@@ -1,24 +1,96 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dia de Peito</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="peitoCSS.css">
 </head>
 <body>
   <main class="container">
-    <h1>Dia de Peito</h1>
-    <p class="subtitulo">Clique em um exercício para marcar ou desmarcar.</p>
 
+  
+    <header class="topo">
+      
+      <div class="icone-app" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6.5 6.5l11 11"></path>
+          <path d="M21 21l-1-1"></path>
+          <path d="M3 3l1 1"></path>
+          <path d="M18 22l4-4"></path>
+          <path d="M2 6l4-4"></path>
+          <path d="M3 10l7-7"></path>
+          <path d="M14 21l7-7"></path>
+        </svg>
+      </div>
+      <div>
+        <h1>Dia de Peito</h1>
+        
+        <p class="status"><span class="ponto"></span><span id="status-texto">Treino em andamento</span></p>
+      </div>
+    </header>
+
+    
+    <section class="card-progresso">
+      <p class="rotulo">PROGRESSO DO TREINO</p>
+      <div class="progresso-linha">
+        <span id="progresso-numeros" class="progresso-numeros">0 de 7</span>
+        <span id="progresso-pct" class="progresso-pct">0%</span>
+      </div>
+     
+      <div id="barra" class="barra"></div>
+      <p id="progresso-texto" class="progresso-texto"></p>
+    </section>
+
+    
+    <div class="checklist-topo">
+      <h2>Seu checklist</h2>
+      <span id="selo-restantes" class="selo-restantes"></span>
+    </div>
+
+   
+    <p class="subtitulo">Faça na ordem. Toque para marcar ou desmarcar.</p>
+
+    
     <ul id="lista" class="lista"></ul>
 
-    <p id="resultado" class="resultado" aria-live="polite"></p>
+ 
+    <div class="faltam">
+      <p id="faltam-titulo" class="faltam-titulo">Ainda faltam</p>
+      <p id="resultado" class="faltam-texto" aria-live="polite"></p>
+    </div>
 
-    <button id="btn-novo-dia" class="btn-novo-dia" type="button">Novo dia</button>
+   
+    <hr class="divisor">
+
+
+    <button id="btn-novo-dia" class="btn-novo-dia" type="button">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path>
+        <path d="M3 3v5h5"></path>
+      </svg>
+      Novo dia
+    </button>
+
+   
+    <p class="dica">Desmarque todos os exercícios para recomeçar.</p>
+
+    
+    <p class="rodape">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="2" y="3" width="20" height="5" rx="1"></rect>
+        <path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"></path>
+        <path d="M10 12h4"></path>
+      </svg>
+      Marcações salvas neste navegador
+    </p>
   </main>
 
-  <script src="script.js"></script>
+ 
+  <script src="PeitoJS.js"></script>
 </body>
 </html>
-
